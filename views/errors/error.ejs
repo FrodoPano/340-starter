@@ -1,0 +1,7 @@
+<% if (Error) { %>
+<h1><%= Error %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<% messages() %>
