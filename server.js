@@ -67,6 +67,16 @@ const host = process.env.HOST
 /* ***********************
  * Log statement to confirm server operation
  *************************/
+app.use(async (err, req, res, next) => {
+  let nav = await utilities.getNav();
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+  res.status(500).render("errors/error", {
+    title: err.status || 'Server Error',
+    message: err.message,
+    nav
+  });
+});
+
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
