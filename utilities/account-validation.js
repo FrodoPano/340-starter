@@ -32,17 +32,15 @@ validate.registrationRules = () => {
     // Email validation
     body("account_email")
       .trim()
-      .escape()
-      .notEmpty()
       .isEmail()
-      .normalizeEmail()
+      .normalizeEmail() // refer to validator.js docs
       .withMessage("A valid email is required.")
       .custom(async (account_email) => {
-        const emailExists = await accountModel.checkExistingEmail(account_email);
-        if (emailExists) {
-          throw new Error("Email exists. Please log in or use different email");
+        const emailExists = await accountModel.checkExistingEmail(account_email)
+        if (emailExists){
+          throw new Error("Email exists. Please log in or use different email")
         }
-      }),
+    }),
 
     // Password validation
     body("account_password")
@@ -81,7 +79,28 @@ validate.checkRegData = async (req, res, next) => {
   next();
 };
 
+validate.classificationRules = () => {
+  return [
+    body("classification_name")
+      .trim()
+      .notEmpty()
+      .isAlphanumeric()
+      .withMessage("Classification name must be alphanumeric with no spaces")
+  ];
+};
 
+validate.checkClassificationData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    return res.render("inventory/add-classification", {
+      title: "Add Classification",
+      nav,
+      errors: errors.array(),
+    });
+  }
+  next();
+};
 
 
 module.exports = validate;
