@@ -8,6 +8,7 @@ const validate = require("../utilities/account-validation");
 router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:inventoryId", invController.buildVehicleDetail);
 router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get("/inv/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
 router.post(
