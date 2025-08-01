@@ -1,0 +1,24 @@
+<%- include('../layouts/header') %>
+
+<main class="management-container">
+  <h1>Account Management</h1>
+  
+  <% if (message) { %>
+    <div class="alert alert-<%= message.type || 'info' %>">
+      <%= message.msg %>
+    </div>
+  <% } %>
+
+  <h2>Welcome <%= accountData.account_firstname %></h2>
+  
+  <% if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv/">Manage Inventory</a></p>
+  <% } %>
+  
+  <div class="account-actions">
+    <a href="/account/update/<%= accountData.account_id %>" class="btn btn-primary">Update Account Information</a>
+  </div>
+</main>
+
+<%- include('../layouts/footer') %>
