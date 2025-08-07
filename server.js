@@ -17,6 +17,7 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const reviewRouter = require("./routes/reviewRoute");
 
 const baseController = require("./controllers/baseController")
 
@@ -71,6 +72,8 @@ app.use(async (req, res, next) => {
 const accountRoute = require("./routes/accountRoute");
 app.use("/account", accountRoute);
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
+
+app.use("/reviews", reviewRouter);
 
 /* ***********************
  * Index

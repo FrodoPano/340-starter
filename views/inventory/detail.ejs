@@ -5,3 +5,38 @@
 </main>
 
 <%- include('../layouts/footer') %>
+
+<% if (locals.loggedin) { %>
+  <div class="review-form">
+    <h3>Leave a Review</h3>
+    <form action="/reviews/add" method="POST">
+      <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+      
+      <label for="rating">Rating (1-5):</label>
+      <input type="number" name="rating" min="1" max="5" required>
+
+      <label for="review_text">Review:</label>
+      <textarea name="review_text" required></textarea>
+
+      <button type="submit">Submit Review</button>
+    </form>
+  </div>
+<% } %>
+
+<div class="reviews">
+  <h3>Customer Reviews</h3>
+  <% if (reviews.length > 0) { %>
+    <% reviews.forEach(review => { %>
+      <div class="review">
+        <p>
+          <strong><%= review.account_firstname %></strong> 
+          rated this <%= review.rating %>/5
+          <small>(<%= new Date(review.created_at).toLocaleDateString() %>)</small>
+        </p>
+        <p><%= review.review_text %></p>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>No reviews yet. Be the first!</p>
+  <% } %>
+</div>

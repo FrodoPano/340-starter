@@ -454,3 +454,38 @@ footer {
 #tools a:hover {
   text-decoration: underline;
 }
+
+/* Review Form Styling */
+.review-form {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.review-form label {
+  display: block;
+  margin-top: 1rem;
+}
+
+.review-form textarea {
+  width: 100%;
+  min-height: 100px;
+}
+
+/* Review List Styling */
+.reviews {
+  margin-top: 2rem;
+}
+
+.review {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.review small {
+  color: #666;
+}
